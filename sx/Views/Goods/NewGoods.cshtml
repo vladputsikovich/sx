@@ -1,0 +1,35 @@
+﻿@model sx.ViewModels.NewGoodsModel
+
+<h2>New goods</h2>
+
+<form asp-action="NewGoods" asp-controller="Goods" asp-anti-forgery="true">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div>
+        <div>
+            <label asp-for="ShortName">Введите название</label><br />
+            <input type="text" asp-for="ShortName" />
+            <span asp-validation-for="ShortName" />
+        </div>
+        <div>
+            <label asp-for="Description">Введите описание</label><br />
+            <input asp-for="Description" />
+            <span asp-validation-for="Description" />
+        </div>
+        <div>
+            <label asp-for="UrlPhoto">Url фото</label><br />
+            <input asp-for="UrlPhoto" />
+            <span asp-validation-for="UrlPhoto" />
+        </div>
+        @*<div>
+            <input asp-for="DatePublish" value="@DateTime.Now" />
+            <span asp-validation-for="DatePublish" />
+        </div>
+        <div>
+            <input asp-for="IdSeller" value="@ViewBag.IdSeller" />
+            <span asp-validation-for="IdSeller" />
+        </div>*@
+        <div>
+            <input type="submit" value="Create" />
+        </div>
+    </div>
+</form>

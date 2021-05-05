@@ -10,6 +10,7 @@ namespace sx.Models
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Goods> Goods { get; set; }
         public AppContext(DbContextOptions<AppContext> options)
             : base(options)
         {

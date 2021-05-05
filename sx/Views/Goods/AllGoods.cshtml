@@ -1,0 +1,24 @@
+﻿@model IQueryable<Goods>
+@{
+    ViewData["Title"] = "AllGoods";
+}
+<a asp-action="NewGoods" asp-controller="Goods">New goods</a>
+<h1>AllGoods</h1>
+
+
+<div class="container" style="display:flex">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@item.UrlPhoto" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@item.ShortName</h5>
+                <p class="card-text">@item.Description</p>
+                @*<a asp-action="Good?id=@item.Id" asp-controller="Goods" >GO</a>*@
+                <a href="Good?id=@item.Id">Go</a>
+            </div>
+        </div>
+    }
+</div>
+
+
