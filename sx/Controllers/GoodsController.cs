@@ -42,7 +42,14 @@ namespace sx.Controllers
                 if (good == null)
                 {
                     // добавляем пользователя в бд
-                    good = new Goods { ShortName = model.ShortName, Description = model.Description, UrlPhoto = model.UrlPhoto, DatePublic = System.DateTime.Now, IdSeller = _context.Users.Where(x=>x.Email == User.Identity.Name).First().Id };
+                    good = new Goods { 
+                        ShortName = model.ShortName, 
+                        Description = model.Description, 
+                        UrlPhoto = model.UrlPhoto, 
+                        DatePublic = System.DateTime.Now, 
+                        IdSeller = _context.Users.Where(x=>x.Email == User.Identity.Name).First().Id, 
+                        Price = model.Price
+                    };
                     _context.Goods.Add(good);
                     await _context.SaveChangesAsync();
 
@@ -59,6 +66,37 @@ namespace sx.Controllers
         {
             var good = _context.Goods.Where(x => x.Id == id).FirstOrDefault();
             return View(good);
+        }
+        // PUT api/users/
+        [HttpPut]
+        public async Task<ActionResult<Goods>> Put(Goods goods)
+        {
+            if (goods == null)
+            {
+                return BadRequest();
+            }
+            if (!_context.Goods.Any(x => x.Id == goods.Id))
+            {
+                return NotFound();
+            }
+
+            _context.Update(goods);
+            await _context.SaveChangesAsync();
+            return Ok(goods);
+        }
+
+        // DELETE api/users/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Goods>> Delete(int id)
+        {
+            Goods goods = _context.Goods.FirstOrDefault(x => x.Id == id);
+            if (goods == null)
+            {
+                return NotFound();
+            }
+            _context.Goods.Remove(goods);
+            await _context.SaveChangesAsync();
+            return Ok(goods);
         }
 
     }
