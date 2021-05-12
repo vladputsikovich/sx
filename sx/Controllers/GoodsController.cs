@@ -67,7 +67,6 @@ namespace sx.Controllers
             var good = _context.Goods.Where(x => x.Id == id).FirstOrDefault();
             return View(good);
         }
-        // PUT api/users/
         [HttpPut]
         public async Task<ActionResult<Goods>> Put(Goods goods)
         {
@@ -85,7 +84,6 @@ namespace sx.Controllers
             return Ok(goods);
         }
 
-        // DELETE api/users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Goods>> Delete(int id)
         {

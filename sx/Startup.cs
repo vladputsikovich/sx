@@ -63,7 +63,7 @@ namespace sx
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Goods}/{action=AllGoods}/{id?}");
             });
         }
     }

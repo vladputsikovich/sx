@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Linq;
 
 namespace sx.Controllers
 {
@@ -42,7 +43,7 @@ namespace sx.Controllers
 
                     await Authenticate(user); // аутентификация
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AllGoods", "Goods");
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -67,10 +68,25 @@ namespace sx.Controllers
                 {
                     await Authenticate(user); // аутентификация
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AllGoods", "Goods"); ;
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
+            return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("AllGoods", "Goods");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Me()
+        {
+            UserModel model = new UserModel();
+            var us = _context.Users.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+            model.user = us;
+            model.goods = _context.Goods.Where(x => x.IdSeller == us.Id).ToList();
             return View(model);
         }
         private async Task Authenticate(User user)

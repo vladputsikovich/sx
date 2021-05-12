@@ -1,0 +1,39 @@
+﻿@model sx.ViewModels.UserModel
+@{
+    ViewData["Title"] = "Me";
+}
+
+<h1>Me</h1>
+
+<h2>@Model.user.Id</h2>
+<h2>@Model.user.Email</h2>
+<h2>@Model.user.Password</h2>
+<h2>@Model.user.Role</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name Goods</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.goods)
+        {
+        <tr>
+            <th>@item.Id</th>
+            <td>@item.ShortName</td>
+            <td>@item.Description</td>
+            <td>@item.DatePublic</td>
+            <td><a class="btn btn-primary text-dark" href="Goods/Good?id=@item.Id">Go</a></td>
+            <td><a class="btn btn-warning text-dark"  href="Goods/Good?id=@item.Id">Update</a></td>
+            <td><a class="btn btn-danger text-dark"  href="Goods/Good?id=@item.Id">Delete</a></td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -9,13 +9,13 @@
 <div class="container" style="display:flex">
     @foreach (var item in Model)
     {
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;margin: 10px;">
             <img class="card-img-top" src="@item.UrlPhoto" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@item.ShortName</h5>
                 <p class="card-text">@item.Description</p>
-                @*<a asp-action="Good?id=@item.Id" asp-controller="Goods" >GO</a>*@
-                <h2>@item.Price</h2>
+                <h2>Price - @item.Price</h2>
+                <h5>Seller - @item.IdSeller</h5>
                 <a href="Good?id=@item.Id">Go</a>
             </div>
         </div>
