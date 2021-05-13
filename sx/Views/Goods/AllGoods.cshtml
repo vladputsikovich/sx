@@ -7,19 +7,20 @@
 
 
 <div class="container" style="display:flex">
-    @foreach (var item in Model)
-    {
-        <div class="card" style="width: 18rem;margin: 10px;">
-            <img class="card-img-top" src="@item.UrlPhoto" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">@item.ShortName</h5>
-                <p class="card-text">@item.Description</p>
-                <h2>Price - @item.Price</h2>
-                <h5>Seller - @item.IdSeller</h5>
-                <a href="Good?id=@item.Id">Go</a>
+    <div class=" card-group">
+        @foreach (var item in Model)
+        {
+            <div class="card" style="width: 18rem;margin: 10px;">
+                <img class="card-img-top" src="@item.UrlPhoto" alt="Card image cap">
+                <div class="card-body">
+                    <h3 class="card-title">@item.ShortName</h3>
+                    <p class="card-text">@item.Description</p>
+                    <h4>Price - @item.Price$</h4>
+                    <a class="btn bg-light" href="../Goods/Good?id=@item.Id">Go</a>
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 
 

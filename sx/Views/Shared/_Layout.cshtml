@@ -22,14 +22,24 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Me">@User.Identity.Name</a>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                                        <i class="material-icons">account_circle</i> @User.Identity.Name
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Me">You</a>
+                                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                                    </div>
+                                </div>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-warning text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Card" asp-action="Card">
+                                    Card(@Context.Request.Cookies.Where(x=>x.Value == User.Identity.Name).Count())
+                                </a>
                             </li>
                         }
-                        else
-                        {
+                                else
+                                {
                             <li class="nav-item">
                                 <a class="btn btn-success text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
@@ -56,6 +66,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @RenderSection("Scripts", required: false)
 </body>
 </html>

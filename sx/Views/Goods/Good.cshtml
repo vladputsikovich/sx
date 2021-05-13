@@ -3,4 +3,12 @@
     ViewData["Title"] = "Good";
 }
 
-<h1>@Model.ShortName</h1>
+<div class="card mb-3">
+    <img class="card-img-top" src="@Model.UrlPhoto" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.ShortName</h5>
+        <p class="card-text">@Model.Description</p>
+        <h4 class="card-text">Price - @Model.Price$</h4>
+    </div>
+    <a class="btn bg-success" href="../Card/AddToCard?id=@Model.Id">Add to card</a>
+</div>
