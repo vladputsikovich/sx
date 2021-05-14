@@ -33,12 +33,12 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Card" asp-action="Card">
+                                <a class="nav-link text-dark" id="card" asp-area="" asp-controller="Card" asp-action="Card">
                                     Card(@Context.Request.Cookies.Where(x=>x.Value == User.Identity.Name).Count())
                                 </a>
                             </li>
                         }
-                                else
+                         else
                                 {
                             <li class="nav-item">
                                 <a class="btn btn-success text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>

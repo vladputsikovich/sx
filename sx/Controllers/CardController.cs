@@ -8,6 +8,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Linq;
+
 namespace sx.Controllers
 {
     public class CardController : Controller
@@ -28,11 +29,11 @@ namespace sx.Controllers
             }
             return View(list);
         }
-        [HttpGet]
-        public IActionResult AddToCard(int id)
+        [HttpPost]
+        public async Task<ActionResult> AddToCard(int id)
         {
             HttpContext.Response.Cookies.Append($"{id}",User.Identity.Name);
-            return Redirect("../Goods/AllGoods");
+            return PartialView("Good");
         }
     }
 }

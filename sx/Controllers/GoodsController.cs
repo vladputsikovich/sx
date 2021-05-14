@@ -26,6 +26,7 @@ namespace sx.Controllers
         {
             var goods = _context.Goods.Select(x => x);
             return View(goods);
+            
         }
         [HttpGet]
         public IActionResult NewGoods()

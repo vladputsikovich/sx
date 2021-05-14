@@ -10,5 +10,9 @@
         <p class="card-text">@Model.Description</p>
         <h4 class="card-text">Price - @Model.Price$</h4>
     </div>
-    <a class="btn bg-success" href="../Card/AddToCard?id=@Model.Id">Add to card</a>
+    @*<a class="btn bg-success" href="../Card/AddToCard?id=@Model.Id">Add to card</a>*@
+    <form method="post" data-ajax="true" data-ajax-method="post" data-ajax-url="/card/AddToCard" data-ajax-update="#card">
+        <input type="text" name="id" value="@Model.Id" /><br>
+        <input type="submit" />
+    </form>
 </div>
