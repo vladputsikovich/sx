@@ -11,8 +11,23 @@
         <h4 class="card-text">Price - @Model.Price$</h4>
     </div>
     @*<a class="btn bg-success" href="../Card/AddToCard?id=@Model.Id">Add to card</a>*@
-    <form method="post" data-ajax="true" data-ajax-method="post" data-ajax-url="/card/AddToCard" data-ajax-update="#card">
-        <input type="text" name="id" value="@Model.Id" /><br>
-        <input type="submit" />
+    <form method="post" class="col-sm-6">
+        <div class="form-group row">
+            <div class="col-sm-7 offset-sm-3">
+                <button class="btn btn-primary" id="submit">Submit</button>
+            </div>
+        </div>
     </form>
 </div>
+@section scripts{
+    <script>
+        $(function () {
+            $('#submit').on('click', function (evt) {
+                evt.preventDefault();
+                $.post('../Card/AddToCard?id=' +@Model.Id, function () {
+                    $('#card').load("/ #card");
+                });
+            });
+        });
+    </script>
+}

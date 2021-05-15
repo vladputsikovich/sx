@@ -33,7 +33,7 @@ namespace sx.Controllers
         public async Task<ActionResult> AddToCard(int id)
         {
             HttpContext.Response.Cookies.Append($"{id}",User.Identity.Name);
-            return PartialView("Good");
+            return Ok();
         }
     }
 }

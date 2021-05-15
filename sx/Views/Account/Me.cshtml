@@ -10,7 +10,7 @@
 <h2>@Model.user.Password</h2>
 <h2>@Model.user.Role</h2>
 
-<table class="table">
+<table class="table" id="MyGoodsTable">
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -25,15 +25,34 @@
     <tbody>
         @foreach (var item in Model.goods)
         {
-        <tr>
-            <th>@item.Id</th>
-            <td>@item.ShortName</td>
-            <td>@item.Description</td>
-            <td>@item.DatePublic</td>
-            <td><a class="btn btn-primary text-dark" href="../Goods/Good?id=@item.Id">Go</a></td>
-            <td><a class="btn btn-warning text-dark"  href="Goods/Good?id=@item.Id">Update</a></td>
-            <td><a class="btn btn-danger text-dark"  href="Goods/Good?id=@item.Id">Delete</a></td>
-        </tr>
+            <tr>
+                <th id="IdItem">@item.Id</th>
+                <td>@item.ShortName</td>
+                <td>@item.Description</td>
+                <td>@item.DatePublic</td>
+                <td><a class="btn btn-primary text-dark" href="../Goods/Good?id=@item.Id">Go</a></td>
+                <td><a class="btn btn-warning text-dark" href="Goods/Good?id=@item.Id">Update</a></td>
+                <td><form method="post" class="col-sm-6">
+                        <div class="form-group row">
+                            <div class="col-sm-7 offset-sm-3">
+                                <button class="btn btn-danger" id="Delete" >Delete</button>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+@section scripts{
+    <script>
+        $(function () {
+            $('#Delete').on('click', function (evt) {
+                evt.preventDefault();
+                $.post('../Goods/Delete?id='+ $("#IdItem").text(), function () {
+                    $('#MyGoodsTable').load("/Account/Me #MyGoodsTable");
+                });
+            });
+        });
+    </script>
+}

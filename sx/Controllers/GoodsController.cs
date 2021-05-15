@@ -85,7 +85,7 @@ namespace sx.Controllers
             return Ok(goods);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPost]
         public async Task<ActionResult<Goods>> Delete(int id)
         {
             Goods goods = _context.Goods.FirstOrDefault(x => x.Id == id);
