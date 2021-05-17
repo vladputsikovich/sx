@@ -4,32 +4,54 @@
 }
 
 <h1>Card</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">№</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Price(per 1)</th>
-            <th scope="col">All price</th>
-            <th scope="col">How much</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <th scope="col">@item.Id</th>
-            <th scope="col">@item.ShortName</th>
-            <th scope="col">@item.Description</th>
-            <th scope="col"><p class="price" id="@item.Id">@item.Price</p></th>
-            <th scope="col"><p class="fullprice" id="@item.Id">@item.Price</p></th>
-            <th scope="col"><input type="number" class="nums" id="@item.Id" name="nums" min="1" max="10" value="1"></th>
-            <th scope="col"><a class="btn bg-danger">x</a></th>
-        </tr>
-        }
-    </tbody>
-</table>
+<div class="CardTable">
+    <table class="table" id="MyCardTable">
+        <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price(per 1)</th>
+                <th scope="col">All price</th>
+                <th scope="col">How much</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="col" id="IdItem">@item.Id</th>
+                    <th scope="col">@item.ShortName</th>
+                    <th scope="col">@item.Description</th>
+                    <th scope="col"><p class="price" id="@item.Id">@item.Price</p></th>
+                    <th scope="col"><p class="fullprice" id="@item.Id">@item.Price</p></th>
+                    <th scope="col"><input type="number" class="nums" id="@item.Id" name="nums" min="1" max="10" value="1"></th>
+                    <th>
+                        <form method="post" class="col-sm-6">
+                            <div class="form-group row">
+                                <div class="col-sm-7 offset-sm-3">
+                                    <button class="btn btn-danger" id="Delete">x</button>
+                                </div>
+                            </div>
+                        </form>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 <h1>Count - <p class="count">0</p></h1>
+
+@section scripts{
+    <script>
+        $(function () {
+            $('.CardTable').on('click', function (evt) {
+                evt.preventDefault();
+                $.post('../Card/Delete?id=' + $("#IdItem").text(), function () {
+                    $('.CardTable').load("/Card/Card #MyCardTable");
+                });
+            });
+        });
+    </script>
+}

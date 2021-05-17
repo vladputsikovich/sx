@@ -68,21 +68,25 @@ namespace sx.Controllers
             var good = _context.Goods.Where(x => x.Id == id).FirstOrDefault();
             return View(good);
         }
-        [HttpPut]
-        public async Task<ActionResult<Goods>> Put(Goods goods)
+        [HttpGet]
+        public IActionResult UpdateGoods(int id)
         {
-            if (goods == null)
-            {
-                return BadRequest();
+            var good = _context.Goods.Where(x => x.Id == id).FirstOrDefault();
+            return View(good);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateGoods(Goods model)
+        {
+            if (ModelState.IsValid)
+            { 
+                model.DatePublic = System.DateTime.Now;
+                model.IdSeller = _context.Users.Where(x => x.Email == User.Identity.Name).First().Id;
+                _context.Goods.Update(model);
+                await _context.SaveChangesAsync();
+                return Ok(model);
             }
-            if (!_context.Goods.Any(x => x.Id == goods.Id))
-            {
-                return NotFound();
-            }
-
-            _context.Update(goods);
-            await _context.SaveChangesAsync();
-            return Ok(goods);
+            return Ok(model);
         }
 
         [HttpPost]

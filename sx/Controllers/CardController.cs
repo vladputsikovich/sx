@@ -35,5 +35,11 @@ namespace sx.Controllers
             HttpContext.Response.Cookies.Append($"{id}",User.Identity.Name);
             return Ok();
         }
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+            HttpContext.Response.Cookies.Delete($"{id}");
+            return Ok();
+        }
     }
 }

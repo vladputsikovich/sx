@@ -32,12 +32,12 @@
                     <td>@item.Description</td>
                     <td>@item.DatePublic</td>
                     <td><a class="btn btn-primary text-dark" href="../Goods/Good?id=@item.Id">Go</a></td>
-                    <td><a class="btn btn-warning text-dark" href="Goods/Good?id=@item.Id">Update</a></td>
+                    <td><a class="btn btn-warning text-dark" href="../Goods/UpdateGoods?id=@item.Id">Update</a></td>
                     <td>
                         <form method="post" class="col-sm-6">
                             <div class="form-group row">
                                 <div class="col-sm-7 offset-sm-3">
-                                    <button class="btn btn-danger" name="@item.Id" id="Delete">Delete</button>
+                                    <button class="btn btn-danger" id="Delete">Delete</button>
                                 </div>
                             </div>
                         </form>
@@ -52,8 +52,8 @@
         $(function () {
             $('.GoodsTable').on('click', function (evt) {
                 evt.preventDefault();
-                $.post('../Goods/Delete?id='+ $("#IdItem").text(), function () {
-                    $('#MyGoodsTable').load("/Account/Me #MyGoodsTable");
+                $.post('../Goods/Delete?id=' + $("#IdItem").text(), function () {
+                    $('.GoodsTable').load("/Account/Me #MyGoodsTable");
                 });
             });
         });

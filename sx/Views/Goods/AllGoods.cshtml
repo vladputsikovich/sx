@@ -2,23 +2,29 @@
 @{
     ViewData["Title"] = "AllGoods";
 }
-<a asp-action="NewGoods" asp-controller="Goods">New goods</a>
 <h1>AllGoods</h1>
 
 
 <div class="container" style="display:flex">
     <div class=" card-group">
-        @foreach (var item in Model)
+        @if (Model.Count() != 0)
         {
-            <div class="card" style="width: 18rem;margin: 10px;">
-                <img class="card-img-top" src="@item.UrlPhoto" alt="Card image cap">
-                <div class="card-body">
-                    <h3 class="card-title">@item.ShortName</h3>
-                    <p class="card-text">@item.Description</p>
-                    <h4>Price - @item.Price$</h4>
-                    <a class="btn bg-light" href="../Goods/Good?id=@item.Id">Go</a>
+            @foreach (var item in Model)
+            {
+                <div class="card" style="width: 18rem;margin: 10px;">
+                    <img class="card-img-top" src="@item.UrlPhoto" alt="Card image cap">
+                    <div class="card-body">
+                        <h3 class="card-title">@item.ShortName</h3>
+                        <p class="card-text">@item.Description</p>
+                        <h4>Price - @item.Price$</h4>
+                        <a class="btn bg-light" href="../Goods/Good?id=@item.Id">Go</a>
+                    </div>
                 </div>
-            </div>
+            }
+        }
+        else
+        {
+            <h2>NO GOODS</h2>
         }
     </div>
 </div>

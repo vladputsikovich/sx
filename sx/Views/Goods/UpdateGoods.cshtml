@@ -1,15 +1,19 @@
-﻿@model sx.ViewModels.NewGoodsModel
+﻿@model Goods
 @{
-    ViewData["Title"] = "New Goods";
+    ViewData["Title"] = "UpdateGoods";
 }
-<h2>New goods</h2>
 
-<form asp-action="NewGoods" asp-controller="Goods" asp-anti-forgery="true">
+<form asp-action="UpdateGoods" asp-controller="Goods" asp-anti-forgery="true">
     <div class="validation" asp-validation-summary="ModelOnly"></div>
     <div>
         <div>
+            <label asp-for="Id">Введите название</label><br />
+            <input type="text" asp-for="@Model.Id" />
+            <span asp-validation-for="Id" />
+        </div>
+        <div>
             <label asp-for="ShortName">Введите название</label><br />
-            <input type="text" asp-for="ShortName" />
+            <input type="text" asp-for="@Model.ShortName" />
             <span asp-validation-for="ShortName" />
         </div>
         <div>
@@ -28,7 +32,7 @@
             <span asp-validation-for="Price" />
         </div>
         <div>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Update" />
         </div>
     </div>
 </form>
