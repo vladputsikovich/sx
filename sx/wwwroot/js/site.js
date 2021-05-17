@@ -19,4 +19,3 @@ $(".nums").change(function () {
     });
     $(".count")[0].innerText= pr;
 });
-
