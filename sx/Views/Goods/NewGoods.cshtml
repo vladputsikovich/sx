@@ -28,6 +28,34 @@
             <span asp-validation-for="Price" />
         </div>
         <div>
+            <label asp-for="Category.Type">Категория</label><br />
+            <select id="sel" asp-for="Category.Type">
+                @foreach (Section sec in (Section[])Enum.GetValues(typeof(Section)))
+                {
+                    <option value="select"> @sec </option>
+                }
+            </select>
+            <span asp-validation-for="Category.Type" />
+        </div>
+        <div>
+            <label asp-for="Category.Kind">Вид</label><br />
+            <input asp-for="Category.Kind" />
+            <span asp-validation-for="Category.Kind" />
+        </div>
+            @for (int i = 0; i < 2; i++)
+            {
+                <div>
+                    <label asp-for="Size[i].Count">Количество</label><br />
+                    <input asp-for="Size[i].Count" value="0" min="0" max="20" />
+                    <span asp-validation-for="Size[i].Count" />
+                </div>
+                <div>
+                    <label asp-for="Size[i].SizeName">Размер</label><br />
+                    <input asp-for="Size[i].SizeName" />
+                    <span asp-validation-for="Size[i].SizeName" />
+                </div>
+            }
+            <div>
             <input type="submit" value="Create" />
         </div>
     </div>

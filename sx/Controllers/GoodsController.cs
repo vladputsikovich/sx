@@ -39,17 +39,25 @@ namespace sx.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<Size> sizes = new List<Size>();
+                foreach (var item in model.Size)
+                {
+                    sizes.Add(item);
+                    _context.Sizes.Add(item);
+                }
                 Goods good = await _context.Goods.FirstOrDefaultAsync(u => u.ShortName == model.ShortName);
                 if (good == null)
                 {
                     // добавляем пользователя в бд
-                    good = new Goods { 
-                        ShortName = model.ShortName, 
-                        Description = model.Description, 
-                        UrlPhoto = model.UrlPhoto, 
-                        DatePublic = System.DateTime.Now, 
-                        IdSeller = _context.Users.Where(x=>x.Email == User.Identity.Name).First().Id, 
-                        Price = model.Price
+                    good = new Goods {
+                        ShortName = model.ShortName,
+                        Description = model.Description,
+                        UrlPhoto = model.UrlPhoto,
+                        DatePublic = System.DateTime.Now,
+                        IdSeller = _context.Users.Where(x => x.Email == User.Identity.Name).First().Id,
+                        Price = model.Price,
+                        Size = sizes,
+                        Category = new Category { Type = model.Category.Type, Kind = model.Category.Kind}
                     };
                     _context.Goods.Add(good);
                     await _context.SaveChangesAsync();
@@ -69,9 +77,17 @@ namespace sx.Controllers
             return View(good);
         }
         [HttpGet]
-        public IActionResult UpdateGoods(int id)
+        public IActionResult UpdateGoods(int id,string result)
         {
             var good = _context.Goods.Where(x => x.Id == id).FirstOrDefault();
+            if (result == "ok")
+            {
+                ViewBag.Message = "Goods update success";
+            }
+            if(result == "bad")
+            {
+                ViewBag.Message = "Goods update with proplem";
+            }
             return View(good);
         }
         [HttpPost]
@@ -84,9 +100,9 @@ namespace sx.Controllers
                 model.IdSeller = _context.Users.Where(x => x.Email == User.Identity.Name).First().Id;
                 _context.Goods.Update(model);
                 await _context.SaveChangesAsync();
-                return Ok(model);
+                return RedirectToAction("UpdateGoods","Goods",new { id = model.Id, result = "ok" });
             }
-            return Ok(model);
+            return RedirectToAction("UpdateGoods", "Goods", new { id = model.Id, result = "bad" });
         }
 
         [HttpPost]

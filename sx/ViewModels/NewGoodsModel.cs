@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sx.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,5 +19,7 @@ namespace sx.ViewModels
         public int IdSeller { get; set; }
         [DataType(DataType.Text)]
         public string Price { get; set; }
+        public List<Size> Size { get; set; }
+        public Category Category { get; set; }
     }
 }

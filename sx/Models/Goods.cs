@@ -14,5 +14,7 @@ namespace sx.Models
         public DateTime DatePublic { get; set; }
         public int IdSeller { get; set; }
         public string Price { get; set; }
+        public List<Size> Size { get; set; } = new List<Size>();
+        public Category Category { get; set; }
     }
 }
