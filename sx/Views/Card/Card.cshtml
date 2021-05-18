@@ -31,7 +31,7 @@
                         <form method="post" class="col-sm-6">
                             <div class="form-group row">
                                 <div class="col-sm-7 offset-sm-3">
-                                    <button class="btn btn-danger" id="Delete">x</button>
+                                    <button class="btn btn-danger" id="delete">x</button>
                                 </div>
                             </div>
                         </form>
@@ -46,8 +46,9 @@
 @section scripts{
     <script>
         $(function () {
-            $('.CardTable').on('click', function (evt) {
+            $('.CardTable').on('submit', function (evt) {
                 evt.preventDefault();
+                console.log(evt)
                 $.post('../Card/Delete?id=' + $("#IdItem").text(), function () {
                     $('.CardTable').load("/Card/Card #MyCardTable");
                 });

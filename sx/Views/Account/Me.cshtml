@@ -50,7 +50,7 @@
 @section scripts{
     <script>
         $(function () {
-            $('.GoodsTable').on('click', function (evt) {
+            $('.GoodsTable').on('submit', function (evt) {
                 evt.preventDefault();
                 $.post('../Goods/Delete?id=' + $("#IdItem").text(), function () {
                     $('.GoodsTable').load("/Account/Me #MyGoodsTable");
