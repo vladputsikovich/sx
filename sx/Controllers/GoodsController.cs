@@ -24,7 +24,7 @@ namespace sx.Controllers
         [HttpGet]
         public IActionResult AllGoods()
         {
-            var goods = _context.Goods.Select(x => x);
+            var goods = _context.Goods.Include(x => x.Size);
             return View(goods);
             
         }
@@ -48,7 +48,6 @@ namespace sx.Controllers
                 Goods good = await _context.Goods.FirstOrDefaultAsync(u => u.ShortName == model.ShortName);
                 if (good == null)
                 {
-                    // добавляем пользователя в бд
                     good = new Goods {
                         ShortName = model.ShortName,
                         Description = model.Description,
@@ -73,7 +72,7 @@ namespace sx.Controllers
         [HttpGet]
         public IActionResult Good(int id)
         {
-            var good = _context.Goods.Where(x => x.Id == id).FirstOrDefault();
+            var good = _context.Goods.Include(x => x.Size).Where(x => x.Id == id).FirstOrDefault();
             return View(good);
         }
         [HttpGet]
