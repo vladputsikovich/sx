@@ -22,23 +22,25 @@ namespace sx.Controllers
         [HttpGet]
         public IActionResult Card()
         {
-            List<Goods> list = new List<Goods>();
+            Dictionary<Goods,char> list = new Dictionary<Goods,char>();
+            string s = "";
             foreach (var item in HttpContext.Request.Cookies.Where(x=>x.Value == User.Identity.Name))
             {
-                list.Add(_context.Goods.Where(x => x.Id.ToString() == item.Key).FirstOrDefault());
+                s = item.Key.Substring(0, item.Key.Length - 1);
+                list.Add(_context.Goods.Where(x => x.Id.ToString() == s).FirstOrDefault(), item.Key[item.Key.Length-1]);
             }
             return View(list);
         }
         [HttpPost]
-        public async Task<ActionResult> AddToCard(int id)
+        public async Task<ActionResult> AddToCard(string id)
         {
-            HttpContext.Response.Cookies.Append($"{id}",User.Identity.Name);
+            HttpContext.Response.Cookies.Append(id,User.Identity.Name);
             return Ok();
         }
         [HttpPost]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
-            HttpContext.Response.Cookies.Delete($"{id}");
+            HttpContext.Response.Cookies.Delete(id);
             return Ok();
         }
     }

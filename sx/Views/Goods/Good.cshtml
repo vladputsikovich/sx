@@ -9,7 +9,7 @@
         <h5 class="card-title">@Model.ShortName</h5>
         <p class="card-text">@Model.Description</p>
         <h4 class="card-text">Price - @Model.Price$</h4>
-        <select>
+        <select id="select">
             @foreach (var item in Model.Size)
             {
                 <option value="@item.SizeName">@item.SizeName  @item.Count</option>
@@ -30,7 +30,9 @@
         $(function () {
             $('#submit').on('click', function (evt) {
                 evt.preventDefault();
-                $.post('../Card/AddToCard?id=' +@Model.Id, function () {
+                var value = $('#select').val();
+                console.log(value);
+                $.post('../Card/AddToCard?id=' +@Model.Id+ value, function () {
                     $('#card').load("/ #card");
                 });
             });

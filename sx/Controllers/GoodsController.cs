@@ -22,9 +22,14 @@ namespace sx.Controllers
             _context = context;
         }
         [HttpGet]
-        public IActionResult AllGoods()
+        public IActionResult AllGoods(string type)
         {
             var goods = _context.Goods.Include(x => x.Size);
+            if (type != null)
+            {
+                goods = _context.Goods.Where(x=>x.Category.Type.ToString() == type).Include(x => x.Size);
+                return Ok(goods);
+            }
             return View(goods);
             
         }
