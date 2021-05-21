@@ -22,16 +22,22 @@ namespace sx.Controllers
             _context = context;
         }
         [HttpGet]
-        public IActionResult AllGoods(string type)
+        public IActionResult AllGoods(string type, string kind)
         {
-            var goods = _context.Goods.Include(x => x.Size);
-            if (type != null)
+            var goods = _context.Goods.Select(x=>x);
+            if (type != null && kind != null)
             {
-                goods = _context.Goods.Where(x=>x.Category.Type.ToString() == type).Include(x => x.Size);
-                return Ok(goods);
+                if(type != "Default")
+                {
+                    goods = goods.Where(x => x.Category.Type == (Section)System.Enum.Parse(typeof(Section), type));
+                }
+                if (kind != "Default")
+                {
+                    goods = goods.Where(x => x.Category.Kind == kind);
+                }
             }
-            return View(goods);
-            
+            return View(goods.Include(x => x.Size));
+
         }
         [HttpGet]
         public IActionResult NewGoods()
