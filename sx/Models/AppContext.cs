@@ -15,7 +15,7 @@ namespace sx.Models
         public AppContext(DbContextOptions<AppContext> options)
             : base(options)
         {
-            //Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

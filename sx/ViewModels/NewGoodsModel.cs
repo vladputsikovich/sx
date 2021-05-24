@@ -18,7 +18,7 @@ namespace sx.ViewModels
         public DateTime DatePublish { get; set; }
         public int IdSeller { get; set; }
         [DataType(DataType.Text)]
-        public string Price { get; set; }
+        public int Price { get; set; }
         public List<Size> Size { get; set; }
         public Category Category { get; set; }
     }
